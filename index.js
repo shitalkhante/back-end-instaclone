@@ -7,15 +7,8 @@ const posts = require("./model");
 const cors = require("cors");
 const fs = require("fs")
 const path = require("path");
-const cloudenery = require("cloudinary").v2;
+
 mongos.connect("mongodb://127.0.0.1:27017/instaclone").then((msg) => { console.log("db created and connected"); })
-
-
-// cloudenery.config({
-//     cloud_name: 'dyvjitqjh',
-//     api_key: '278616331714897',
-//     api_secret: '4RWn8tWzyV6EfN7D2B_aMtkgH80'
-// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,12 +28,7 @@ var storage = multer.diskStorage({
 });
 //   const maxSize=50*1024;
 const upload = multer({ storage: storage });
-// router.use(bodyParser.urlencoded({ extended: false }));
-// router.use(multer({ dest: './uploads/',
-// rename: function (fieldname, filename) {
-//   return filename;
-// },```
-// }));
+
 app.get("/", async (req, res) => {
     var data = await posts.find().sort({createdAt:-1});
     res.json({data: data});
